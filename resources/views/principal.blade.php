@@ -1,10 +1,9 @@
 @extends('layouts.app')
-
 @section('titulo')
-    Holaaaaaaaaaaaaaaa
+    Pagina principal
 @endsection
 
 @section('contenido')
 
-    Tengo calooooooooooooooooooor
+    Contenuidosssssssssssss
 @endsection
