@@ -1,22 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Devstagram @yield('titulo')</title>
+    <title>Devstagram - @yield('titulo')</title>
+    <link  href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">  
+    <script src="{{asset('js/app.js')}}" defer></script>
+    @vite('public/css/app.css')
 </head>
-<body>
-    <nav>
-        <a href="/">Inicio</a>
-        <a href="/principal">Prinipal</a>
+<body class="bg-gray-100">
+    <header class="p-5 border-b bg-white shadow">
+        <div class="container mx-auto flex justify-between items-center">
 
-    </nav>
-    <h1>@yield('titulo')</h1>
+            <h1 class="text-4xl font-bold">
+                Devstagram
+            </h1>
+            @auth
+                <nav class="flex gap-2 items-center ">
+                    <a href="" class="flex items-center gap-2 bg-white border p-2 text-gray-600 rounded text-sm uppercase font-bold cursor-pointer">Crear</a>
 
-    <hr>
+                    <a class="font-bold text-gray-600 text-sm" href="/">
+                        Hola:<span class="font-normal">{{auth()->user()->username}}</span></a>
 
-    @yield('contenido')
+                    <form action="{{route('logout')}}" method="POST">
+                        @csrf
+                        <button type="submit" class="font-bold uppercase text-gray-600 text-sm" >
+                            Cerrar Sesión</button>
+                    </form>
+                    
+                    
 
+                </nav>
+            @endauth
+            @guest
+                <nav class="flex gap-2 items-center ">
+
+                    <a class="font-bold uppercase text-gray-600 text-sm" href="/">LOGIN</a>
+                    <a class="font-bold uppercase text-gray-600 text-sm" href="{{route('register')}}">CREAR CUENTA</a>
+                    
+
+                </nav>
+            @endguest
+
+            
+
+        </div>
+        
+
+    </header>
+    <main class="container mx-auto mt-10">
+        <h2 class="font-bold text-center text-3xl mb-10">
+            @yield('titulo')
+        </h2>
+        @yield('contenido')
+
+    </main>
+
+
+    <footer class="text-center p-5 text-gray-500 font-bold uppercase mt-10">
+        DevStagram - Todos los derechos reservados {{now()->year}}
+    </footer>
 
 </body>
 </html>
