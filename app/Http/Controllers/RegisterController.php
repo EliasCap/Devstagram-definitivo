@@ -33,7 +33,7 @@ class RegisterController extends Controller
             'email'=> $request->email,
             'password'=> Hash::make($request->password)
         ]);
-
+        $variableUsername = $request->username;
         // Autenticar un usuario
 
         // auth()->attempt([
@@ -46,6 +46,6 @@ class RegisterController extends Controller
 
         //Redireccionar
 
-        return redirect()->route('posts.index');
+        return redirect()->route('post.index', [$variableUsername]);
     }
 }
