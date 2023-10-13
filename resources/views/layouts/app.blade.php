@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Devstagram - @yield('titulo')</title>
+    @stack('styles')
     <link  href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">  
     <script src="{{asset('js/app.js')}}" defer></script>
     @vite('public/css/app.css')
@@ -14,7 +15,8 @@
         <div class="container mx-auto flex justify-between items-center">
 
             <h1 class="text-4xl font-bold">
-                Devstagram
+                <a href="{{route('home')}}">Devstagram</a>
+                
             </h1>
             @auth
                 <nav class="flex gap-2 items-center ">
@@ -24,23 +26,20 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
                           </svg>             
                     </a>                  
-                    <a href="{{route('post.index',$user->username)}}" class="font-bold text-gray-600 text-sm" >
-                        Hola:<span class="font-normal">{{ $user->username}}</span></a>
+                    <a href="{{route('post.index',auth()->user()->username)}}" class="font-bold text-gray-600 text-sm" >
+                        Hola:<span class="font-normal">{{ auth()->user()->username }}</span></a>
 
                     <form action="{{route('logout')}}" method="POST">
                         @csrf
                         <button type="submit" class="font-bold uppercase text-gray-600 text-sm" >
                             Cerrar Sesión</button>
                     </form>
-                    
-                    
-
                 </nav>
             @endauth
             @guest
                 <nav class="flex gap-2 items-center ">
 
-                    <a class="font-bold uppercase text-gray-600 text-sm" href="/">LOGIN</a>
+                    <a class="font-bold uppercase text-gray-600 text-sm" href="{{route('login')}}">LOGIN</a>
                     <a class="font-bold uppercase text-gray-600 text-sm" href="{{route('register')}}">CREAR CUENTA</a>
                     
 
